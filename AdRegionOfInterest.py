@@ -8,8 +8,13 @@ def create_heatmap(ad_size):
     return np.zeros((ad_size[0], ad_size[1]))
 
 def map_gaze_to_grid(gaze_x, gaze_y, webcam_size, ad_size):
-    ad_x = gaze_x * ad_size[1] / webcam_size[0] #openCV treats image dimensions as (height, width)
-    ad_y = gaze_y * ad_size[0] / webcam_size[1]
+    # Flip Y-axis (since webcam Y=0 is top, but OpenCV images Y=0 is bottom)
+    flipped_gaze_y = webcam_size[1] - gaze_y  
+
+    # Scale properly to ad size
+    ad_x = int((gaze_x / webcam_size[0]) * ad_size[1])
+    ad_y = int((flipped_gaze_y / webcam_size[1]) * ad_size[0])  # Correct Y scaling
+
     return ad_x, ad_y
 
 def update_heatmap(heatmap, gaze_x, gaze_y, webcam_size, ad_size):
@@ -48,7 +53,17 @@ def show_ad(ad_path, gaze_tracking):
         if right_pupil:
             heatmap = update_heatmap(heatmap, right_pupil[0], right_pupil[1], webcam_size, ad_size)
 
-        cv2.imshow("Ad Display", frame)  
+        cv2.namedWindow("Ad Display", cv2.WINDOW_NORMAL)  # Allow window resizing
+        cv2.imshow("Ad Display", frame)
+
+        # Center the window on the screen
+        screen_width = 1920  # Adjust if needed
+        screen_height = 1080  # Adjust if needed
+        window_width = frame.shape[1]
+        window_height = frame.shape[0]
+
+        cv2.moveWindow("Ad Display", (screen_width - window_width) // 2, (screen_height - window_height) // 2)
+
         if cv2.waitKey(1) == 27:  
             break
 
