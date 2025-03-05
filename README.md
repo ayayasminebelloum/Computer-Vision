@@ -85,7 +85,7 @@ Webcam lagging?	Reduce video frame size in code
 
 👨‍💻 Contributing
 
-@ayayasminebelloum & @makiwarner & @inds123
+@ayayasminebelloum & @makiwarner & @inds123 & @shahafbr
 
 📜 License
 
