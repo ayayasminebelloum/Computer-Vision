@@ -1,93 +1,118 @@
+Here’s a clean, corrected, and complete version of your README.md, tailored specifically to your version of the Computer Vision project with gaze tracking, ad + heatmap, and fullscreen UI logic.
+
+⸻
+
+
+
 # 🖥️ Computer Vision Project
 
-This repository contains two main functionalities:
-1. **Gaze Tracking** - Detects and tracks the user's eye movement and direction.
-2. **Ad Region of Interest (ROI)** - Detects faces and marks specific regions where advertisements could be placed.
+This project provides a real-time **gaze tracking system** and a visual analytics interface for measuring user attention on **ads** via heatmaps. It also includes calibration and live webcam gaze visualization, built with OpenCV, Dlib, and a fullscreen UI.
 
 ---
 
 ## 📌 Features
 
-✔️ **Real-time gaze tracking** using a webcam  
-✔️ **Detects where a person is looking** (left, right, up, down, center)  
-✔️ **Blinks detection** using Eye Aspect Ratio (EAR)  
-✔️ **Face and Ad Region Detection** using Dlib and OpenCV  
-✔️ **Customizable settings for both modules**  
+✔️ Fullscreen OpenCV GUI with custom button interaction  
+✔️ **Real-time gaze tracking** with a webcam  
+✔️ **Calibration module** to improve accuracy  
+✔️ Live **gaze visualization** on screen (camera mode)  
+✔️ Watch **ad videos or images** and generate **gaze heatmaps**  
+✔️ Eye direction detection using `dlib` and `GazeTracking`  
+✔️ Disable ad/camera until calibration is complete
 
 ---
 
-## 🚀 **Installation**
+## 🚀 Installation
 
-### **1️⃣ Clone the Repository**
+### 1️⃣ Clone the Repository
+
 ```bash
-git clone -b ad_region_of_interest https://github.com/ayayasminebelloum/Computer-Vision.git --single-branch
-cd Computer-Vision
+git clone https://github.com/your-username/computer-vision.git
+cd computer-vision
 
 2️⃣ Create a Virtual Environment
 
-python -m venv venv
+python3.11 -m venv venv
+source venv/bin/activate
 
-3️⃣ Activate the Virtual Environment
+✅ Make sure you’re using Python 3.11 (not 3.13).
 
-# Mac / Linux
-source venv/bin/activate  
+3️⃣ Install Dependencies
 
-# Windows
-venv\Scripts\activate
-
-4️⃣ Install Dependencies
-
+pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
+
+If dlib fails to install, follow instructions below in 🛠 Troubleshooting.
+
+⸻
 
 🎯 How to Run the Project
 
-1️⃣ Run Gaze Tracking
+🧠 Main App: Gaze Tracker + Ad Heatmap
 
-Detects where a user is looking in real-time using a webcam.
+python src/main.py
 
-python example.py
+	•	Navigate using the fullscreen interface
+	•	Calibrate before using the camera or ads
+	•	Watch ads and generate gaze-based heatmaps
 
-➡️ Expected Output
-	•	Displays the eye coordinates, gaze direction, and whether the person is blinking.
-	•	Detects left, right, up, down, and center gaze.
+⸻
 
-2️⃣ Run Ad Region of Interest (ROI)
+🗂️ Project Structure
 
-Detects faces and marks regions where advertisements can be placed.
+📂 computer-vision/
+│
+├── venv/                     # Virtual environment
+├── requirements.txt          # Python dependencies
+│
+├── src/
+│   ├── main.py               # Main application logic
+│   ├── gaze_tracking/        # GazeTracking module
+│   ├── ad_tracking/
+│   │   ├── calibrate.py      # Calibration routine
+│   │   ├── camera.py         # Live gaze visualization
+│   │   ├── ad.py             # Show ad and generate heatmap
+│   ├── utils/
+│   │   └── ui_utils.py       # Fullscreen UI rendering
+│   ├── data/
+│   │   ├── ad1.jpg … ad9.jpg # Sample ad images
 
-python AdRegionOfInterest.py
 
-➡️ Expected Output
-	•	Draws a bounding box around detected faces.
-	•	Marks Ad Regions dynamically.
 
-🎥 Run with a File Instead of Webcam
+⸻
 
-python AdRegionOfInterest.py "AdImages/PHOTO-2025-03-02-09-10-01.jpg"
+🎥 Run with a Specific Ad Image
+
+python src/main.py
+
+➡️ Use the UI to select an ad and generate the heatmap.
+
+⸻
 
 🛠 Troubleshooting
 
 Issue	Solution
-Black screen on webcam?	Ensure your webcam is working (python -m cv2)
-Gaze detection incorrect?	Adjust lighting conditions or camera angle
-Dlib not found?	Run pip install dlib opencv-python
-Webcam lagging?	Reduce video frame size in code
+ModuleNotFoundError: cv2	Run pip install opencv-python
+dlib fails to install	Use Python 3.11 and run: brew install cmake && pip install dlib
+Webcam shows black screen	Try changing lighting, or test with python -m cv2
+Gaze not accurate	Re-run calibration, adjust distance or lighting
 
-📌 Project Structure
 
-📂 Computer-Vision
-├── 📂 gaze_tracking        # Gaze tracking module
-├── 📂 AdImages             # Image dataset for Ad ROI
-├── 📜 example.py           # Runs gaze tracking
-├── 📜 AdRegionOfInterest.py # Runs Ad ROI detection
-├── 📜 requirements.txt      # Dependencies
-├── 📜 README.md             # Documentation
 
-👨‍💻 Contributing
+⸻
 
-@ayayasminebelloum & @makiwarner & @inds123 & @shahafbr
+👨‍💻 Contributors
+	•	@ayayasminebelloum
+	•	@makiwarner
+	•	@inds123
+	•	@shahafbr
+
+⸻
 
 📜 License
 
-This project is licensed under MIT License. Feel free to use and modify.
+This project is licensed under the MIT License.
+Feel free to use, share, and modify with credit.
+
+Let me know if you want this turned into a downloadable `README.md` file, or if you want to include screenshots, example outputs, or demo videos.
 
