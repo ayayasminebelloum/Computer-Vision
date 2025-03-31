@@ -33,16 +33,6 @@ This application captures real-time gaze data using your webcam, guides you thro
 |  |
 |  └── 📜 main.py
 |
-├── 📂 tests/
-│  ├── 📜 test_ad.py
-│  ├── 📜 test_calibrate.py
-│  ├── 📜 test_create_heatmap.py
-│  ├── 📜 test_grid_mapping.py
-│  ├── 📜 test_screenres.py
-│  ├── 📜 test_show_heatmap.py
-│  ├── 📜 test_transformation_matrix.py
-│  └── 📜 test_all.py
-|
 ├── 📜 .DS_Store
 ├── 📜 .gitignore
 ├── 📜 README.md
