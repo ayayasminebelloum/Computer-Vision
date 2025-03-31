@@ -1,118 +1,157 @@
-Here’s a clean, corrected, and complete version of your README.md, tailored specifically to your version of the Computer Vision project with gaze tracking, ad + heatmap, and fullscreen UI logic.
+# Gaze-Tracking Application
 
-⸻
+## Overview
 
+This application captures real-time gaze data using your webcam, guides you through a calibration process, and visualizes your gaze activity as a heatmap over a displayed advertisement. The system maps gaze points to screen coordinates and provides insights into how users view visual content.
 
+## 📁 Project Structure
+``` css
+📂 Computer-Vision/
+├── 📂 data/  
+│  ├── 📜 ad1.jpg
+│  ├── 📜 ad2.jpg
+│  ├── 📜 ...
+│  └── 📜 ad9.jpg      
+│
+├── 📂 src/ # Main Code Folder.  
+|  ├── 📂 ad_tracking/ 
+|  │  ├── 📜 ad.py
+|  │  ├── 📜 calibrate.py
+|  │  └── 📜 camera.py
+|  |        
+|  ├── 📂 gaze_tracking/ 
+|  │  ├── 📜 __init__.py
+|  │  ├── 📜 calibration.py
+|  │  ├── 📜 eye.py
+|  │  ├── 📜 gaze_tracking.py
+|  │  ├── 📜 pupil.py
+|  |  └── 📂trained_models/
+|  |  |  └── 📜 shape_predictor_68_face_landmarks.dat
+|  |
+|  ├── 📂 utils/
+|  |  └── 📜 ui_utils.py
+|  |
+|  └── 📜 main.py
+|
+├── 📂 tests/
+│  ├── 📜 test_ad.py
+│  ├── 📜 test_calibrate.py
+│  ├── 📜 test_create_heatmap.py
+│  ├── 📜 test_grid_mapping.py
+│  ├── 📜 test_screenres.py
+│  ├── 📜 test_show_heatmap.py
+│  ├── 📜 test_transformation_matrix.py
+│  └── 📜 test_all.py
+|
+├── 📜 .DS_Store
+├── 📜 .gitignore
+├── 📜 README.md
+└── 📜 requirements.txt      
+           
+```
+## Features
 
-# 🖥️ Computer Vision Project
-
-This project provides a real-time **gaze tracking system** and a visual analytics interface for measuring user attention on **ads** via heatmaps. It also includes calibration and live webcam gaze visualization, built with OpenCV, Dlib, and a fullscreen UI.
+- **Live Video Capture:** Initializes the webcam and captures live video feed.
+- **Calibration Process:** Prompts the user to look at a grid of points for calibration.
+- **Real-Time Gaze Tracking:** Tracks and maps gaze points to screen coordinates.
+- **Heatmap Visualization:** Generates and displays a heatmap based on gaze activity.
+- **Advertisement Display:** Shows an advertisement in full-screen mode after calibration.
 
 ---
 
-## 📌 Features
+## Installation
 
-✔️ Fullscreen OpenCV GUI with custom button interaction  
-✔️ **Real-time gaze tracking** with a webcam  
-✔️ **Calibration module** to improve accuracy  
-✔️ Live **gaze visualization** on screen (camera mode)  
-✔️ Watch **ad videos or images** and generate **gaze heatmaps**  
-✔️ Eye direction detection using `dlib` and `GazeTracking`  
-✔️ Disable ad/camera until calibration is complete
+### Prerequisites
+
+- Python 3.7–3.10 recommended  
+- A working webcam  
+- OS: Windows, macOS, or Linux  
+- (Optional) [Anaconda](https://www.anaconda.com/) environment for easier dependency management
 
 ---
 
-## 🚀 Installation
-
-### 1️⃣ Clone the Repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/computer-vision.git
-cd computer-vision
+git clone <repository-url>
+cd Computer-Vision
+```
+### 2. Create a Virtual Environment
+2.1 - Create a virtual environment named 'venv' (make sure you are inside `Computer-Vision/` ):
+```bash
+python -m venv venv
+```
 
-2️⃣ Create a Virtual Environment
-
-python3.11 -m venv venv
+2.2 - Activate the virtual environment:
+```bash
 source venv/bin/activate
+```
 
-✅ Make sure you’re using Python 3.11 (not 3.13).
+2.3 - You can optionally add this command after activation to confirm your venv is working:
+```bash
+which python
+```
 
-3️⃣ Install Dependencies
-
-pip install --upgrade pip setuptools wheel
+### 3. Install Dependencies
+Use `pip` with the provided `requirements.txt`:
+```bash
 pip install -r requirements.txt
+```
+Some users may experience issues installing the `dlib` library, which is required for facial landmark detection. If so, try one of the following options:
 
-If dlib fails to install, follow instructions below in 🛠 Troubleshooting.
+Option A: Using Conda
+```bash
+conda install -c conda-forge dlib
+```
 
-⸻
+Option B: Using a Precompiled Wheel
 
-🎯 How to Run the Project
+Download and install a precompiled .whl file compatible with your Python version from Gohlke's repository:
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#dlib
 
-🧠 Main App: Gaze Tracker + Ad Heatmap
+and place it in your Computer-Vision folder. then run:
+```bash
+pip install <downloaded-filename>.whl
+```
 
+## Usage
+
+### Step 1: Setup
+* Make sure you’re in the project’s root directory.
+* Ensure that a working webcam is connected and accessible.
+
+### Step 2: Run the Application
+The main script is located in the `src/` directory. Launch it with:
+```bash
 python src/main.py
+```
 
-	•	Navigate using the fullscreen interface
-	•	Calibrate before using the camera or ads
-	•	Watch ads and generate gaze-based heatmaps
+Upon launch, the user will reach the home manue where he/she be prompted to run the calibration first. The user will be promped to look at a grid of points to calibrate gaze detection. This calibration helps the system accurately map your gaze to screen coordinates.
 
-⸻
+---
 
-🗂️ Project Structure
+### 🔄 Calibration and Coordinate Mapping Flow
 
-📂 computer-vision/
-│
-├── venv/                     # Virtual environment
-├── requirements.txt          # Python dependencies
-│
-├── src/
-│   ├── main.py               # Main application logic
-│   ├── gaze_tracking/        # GazeTracking module
-│   ├── ad_tracking/
-│   │   ├── calibrate.py      # Calibration routine
-│   │   ├── camera.py         # Live gaze visualization
-│   │   ├── ad.py             # Show ad and generate heatmap
-│   ├── utils/
-│   │   └── ui_utils.py       # Fullscreen UI rendering
-│   ├── data/
-│   │   ├── ad1.jpg … ad9.jpg # Sample ad images
+![Calibration Diagram](./data/calibration_mapping.png)  
 
+*Figure 1: Calibration process mapping screen-relative points to gaze-tracked coordinates and generating a homography transformation matrix.*
 
+---
+### 🎯 Gaze Tracking Pipeline
 
-⸻
+![Gaze Frame Pipeline](./data/gaze_tracking_pipeline.png)
 
-🎥 Run with a Specific Ad Image
+*Figure 2: Step-by-step frame processing — from webcam capture to eye landmark detection.*
 
-python src/main.py
+---
 
-➡️ Use the UI to select an ad and generate the heatmap.
+### 🔥 Example Output - Gaze Heatmap
+![Example Output](./data/Ex_out.png) 
 
-⸻
+*Figure 3: Gaze heatmap generated over an advertisement, visualizing fixation intensity across screen regions.*
 
-🛠 Troubleshooting
+## License
+MIT License
 
-Issue	Solution
-ModuleNotFoundError: cv2	Run pip install opencv-python
-dlib fails to install	Use Python 3.11 and run: brew install cmake && pip install dlib
-Webcam shows black screen	Try changing lighting, or test with python -m cv2
-Gaze not accurate	Re-run calibration, adjust distance or lighting
-
-
-
-⸻
-
-👨‍💻 Contributors
-	•	@ayayasminebelloum
-	•	@makiwarner
-	•	@inds123
-	•	@shahafbr
-
-⸻
-
-📜 License
-
-This project is licensed under the MIT License.
-Feel free to use, share, and modify with credit.
-
-Let me know if you want this turned into a downloadable `README.md` file, or if you want to include screenshots, example outputs, or demo videos.
-
+## Contributions
+Feel free to submit issues or pull requests. Contributions are welcome!
