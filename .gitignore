@@ -1,2 +1,6 @@
 # Exclude the venv folder
 CV_venv/
+venv/
+__pycache__/
+*.pyc
+
