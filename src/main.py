@@ -1,4 +1,5 @@
 # 1. Importing necessary libraries and modules:
+# 1. Importing necessary libraries and modules:
 import cv2
 import numpy as np
 from gaze_tracking import GazeTracking
@@ -6,10 +7,6 @@ from ad_tracking.calibrate import run_calibration
 from ad_tracking.ad import choose_ad, show_ad, display_heatmap
 from ad_tracking.camera import show_live_coordinates
 from utils.ui_utils import get_screen_resolution, show_menu_screen, show_message_screen
-
-# --------------------------------------------------------------------------
-# 2. The main function for running our Gaze Tracker app implementation: 
-# --------------------------------------------------------------------------
 def main():
     screen_width, screen_height = get_screen_resolution()
     gaze_tracking = GazeTracking()
@@ -36,18 +33,19 @@ def main():
             "Choose one of the options below to get started."
         ]
 
-        buttons = [
-            ("Calibrate Gaze", (200, 600)),
-            ("Live Camera Mode", (900, 600)),
-            ("Ad + Heatmap", (200, 750)),
-        ]
-
-        # Same order as buttons: True means enabled, False means disabled
-        enabled_flags = [
-            True,           # Calibrate is always enabled
-            calibrated,     # Camera mode only if calibrated
-            calibrated      # Ad mode only if calibrated
-        ]
+        # If not calibrated, only show calibrate button
+        if not calibrated:
+            buttons = [
+                ("Calibrate Gaze", (550, 650)),
+            ]
+            enabled_flags = [True]
+        else:
+            buttons = [
+                ("Calibrate Gaze", (200, 600)),
+                ("Live Camera Mode", (900, 600)),
+                ("Ad + Heatmap", (200, 750)),
+            ]
+            enabled_flags = [True, True, True]
 
         choice = show_menu_screen(
             screen_width,
@@ -55,7 +53,7 @@ def main():
             title,
             buttons,
             show_home_button=False,
-            enabled=enabled_flags  # <-- Add this to your show_menu_screen logic
+            enabled=enabled_flags
         )
 
         if choice == 0:
@@ -90,6 +88,5 @@ def main():
 
     cv2.destroyAllWindows()
 
-# 2.4 - Run main() to execute this file directly (the full program):
 if __name__ == "__main__":
     main()
