@@ -126,7 +126,9 @@ The main script is located in the `src/` directory. Launch it with:
 python src/main.py
 ```
 
-Upon launch, the user will reach the home manue where he/she be prompted to run the calibration first. The user will be promped to look at a grid of points to calibrate gaze detection. This calibration helps the system accurately map your gaze to screen coordinates.
+Upon launch, the user will reach the home manue where he/she be prompted to run the calibration first. 
+The user will be promped to look at a grid of points to calibrate gaze detection. 
+This calibration helps the system accurately map your gaze to screen coordinates.
 
 ---
 ## Troubleshooting
