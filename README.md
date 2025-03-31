@@ -129,6 +129,15 @@ python src/main.py
 Upon launch, the user will reach the home manue where he/she be prompted to run the calibration first. The user will be promped to look at a grid of points to calibrate gaze detection. This calibration helps the system accurately map your gaze to screen coordinates.
 
 ---
+## Troubleshooting
+
+Issue	Solution
+ModuleNotFoundError: cv2	Run pip install opencv-python
+dlib fails to install	Use Python 3.11 and run: brew install cmake && pip install dlib
+Webcam shows black screen	Try changing lighting, or test with python -m cv2
+Gaze not accurate	Re-run calibration, adjust distance or lighting
+
+---
 
 ### 🔄 Calibration and Coordinate Mapping Flow
 
@@ -154,4 +163,8 @@ Upon launch, the user will reach the home manue where he/she be prompted to run 
 MIT License
 
 ## Contributions
-Feel free to submit issues or pull requests. Contributions are welcome!
+• @inds123
+• @shahafbr
+• @ayayasminebelloum
+• @makiwarner
+
